@@ -2,6 +2,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
+
+import "leaflet/dist/leaflet.css";
+// @ts-expect-error - Typescript cannot find the styles export, but it works correctly - it's just a CSS file
+import "react-leaflet-markercluster/styles";
 import "./index.css";
 
 const queryClient = new QueryClient({
