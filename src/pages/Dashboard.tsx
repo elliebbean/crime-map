@@ -1,5 +1,5 @@
 import { Map as LeafletMap } from "leaflet";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useParams } from "react-router";
 import CrimeStats from "../components/CrimeStats";
 import MapView from "../components/MapView";
@@ -27,6 +27,32 @@ export default function Dashboard() {
   }
 
   const { crimes, isPending } = useCrimesFromPostcodes(postcodes, year, month);
+
+  // Recenter the map when the data changes
+  useEffect(() => {
+    const map = mapRef.current;
+    const latitudes = crimes.map((crime) => parseFloat(crime.location.latitude));
+    const longitudes = crimes.map((crime) => parseFloat(crime.location.longitude));
+
+    const minLatitude = Math.min(...latitudes);
+    const minLongitude = Math.min(...longitudes);
+    const maxLatitude = Math.max(...latitudes);
+    const maxLongitude = Math.max(...longitudes);
+
+    if (
+      !isPending &&
+      map &&
+      isFinite(minLatitude) &&
+      isFinite(maxLatitude) &&
+      isFinite(minLongitude) &&
+      isFinite(maxLongitude)
+    ) {
+      map.fitBounds([
+        [minLatitude, minLongitude],
+        [maxLatitude, maxLongitude],
+      ]);
+    }
+  }, [crimes, isPending]);
 
   let message: string | undefined;
 
