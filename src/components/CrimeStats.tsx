@@ -35,7 +35,9 @@ export default function CrimeStats({ crimes }: CrimeStatsProps) {
 
   return (
     <details>
-      <summary className="p-2 font-bold text-lg bg-gray-50 dark:bg-gray-700">{crimes.length} crimes</summary>
+      <summary className="cursor-pointer p-2 font-bold text-lg bg-gray-50 dark:bg-gray-700 hover:bg-gray-200 hover:dark:bg-gray-600">
+        {crimes.length} crimes
+      </summary>
 
       <div className="flex flex-col p-2 gap-4">
         <StatsTable
