@@ -1,0 +1,56 @@
+import { useMemo } from "react";
+import type { CrimeData } from "../api/crimesApi";
+import useTranslateCrimeCategory from "../hooks/useTranslateCrimeCategory";
+import StatsTable from "./StatsTable";
+
+interface CrimeStatsProps {
+  crimes: CrimeData[];
+}
+
+export default function CrimeStats({ crimes }: CrimeStatsProps) {
+  const translateCrimeCategory = useTranslateCrimeCategory();
+
+  const crimesByCategory = useMemo(() => {
+    const result = new Map<string, number>();
+
+    for (const crime of crimes) {
+      const count = result.get(crime.category) ?? 0;
+      result.set(crime.category, count + 1);
+    }
+
+    return result;
+  }, [crimes]);
+
+  const crimesByOutcome = useMemo(() => {
+    const result = new Map<string, number>();
+
+    for (const crime of crimes) {
+      const outcome = crime.outcome_status?.category ?? "None";
+      const count = result.get(outcome) ?? 0;
+      result.set(outcome, count + 1);
+    }
+
+    return result;
+  }, [crimes]);
+
+  return (
+    <details>
+      <summary className="p-2 font-bold text-lg bg-gray-50 dark:bg-gray-700">{crimes.length} crimes</summary>
+
+      <div className="flex flex-col p-2 gap-4">
+        <StatsTable
+          headers={["Category", "Crimes"]}
+          rows={[...crimesByCategory.entries()].map(([category, count]) => [
+            translateCrimeCategory(category),
+            count.toString(),
+          ])}
+        />
+
+        <StatsTable
+          headers={["Outcome", "Crimes"]}
+          rows={[...crimesByOutcome.entries()].map(([outcome, count]) => [outcome, count.toString()])}
+        />
+      </div>
+    </details>
+  );
+}

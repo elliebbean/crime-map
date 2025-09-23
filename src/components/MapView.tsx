@@ -1,6 +1,6 @@
 import { Map as LeafletMap } from "leaflet";
 import { useMemo } from "react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, ZoomControl } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import type { CrimeData } from "../api/crimesApi";
 import useTranslateCrimeCategory from "../hooks/useTranslateCrimeCategory";
@@ -44,7 +44,9 @@ export default function MapView({ ref, crimes }: MapViewProps) {
         [50, 2],
       ]}
       scrollWheelZoom={true}
+      zoomControl={false}
     >
+      <ZoomControl position="bottomright" />
       <TileLayer
         attribution='
             &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors
