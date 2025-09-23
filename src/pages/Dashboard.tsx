@@ -68,7 +68,7 @@ export default function Dashboard() {
     <>
       <div className="h-screen w-screen flex flex-col">
         <SearchBar />
-        <div className="grow">
+        <div className="grow relative">
           <div className="absolute flex flex-col w-full h-full">
             {message && (
               <div className="z-10 self-center bg-gray-50 border border-gray-300 text-gray-900 text-lg m-4 p-2 rounded-xl shadow-lg dark:bg-gray-900 dark:border-gray-700 dark:text-gray-200">
