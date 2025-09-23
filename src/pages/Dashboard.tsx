@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { useParams } from "react-router";
 import CrimeStats from "../components/CrimeStats";
 import MapView from "../components/MapView";
+import SearchBar from "../components/SearchBar";
 import useCrimesFromPostcodes from "../hooks/useCrimesFromPostcodes";
 import { getValidPostcodes } from "../utils/postcode";
 
@@ -40,6 +41,7 @@ export default function Dashboard() {
   return (
     <>
       <div className="h-screen w-screen flex flex-col">
+        <SearchBar />
         <div className="grow">
           <div className="absolute flex flex-col w-full h-full">
             {message && (
