@@ -28,7 +28,7 @@ export interface PostcodeData {
 }
 
 export async function fetchPostcode(postcode: string): Promise<PostcodeResponse> {
-  const response = await fetch(`http://api.getthedata.com/postcode/${postcode}`);
+  const response = await fetch(`https://api.getthedata.com/postcode/${postcode}`);
   const json = await response.json();
   return json;
 }
