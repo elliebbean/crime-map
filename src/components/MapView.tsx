@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { MapContainer, Marker, Popup, TileLayer, ZoomControl } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import type { CrimeData } from "../api/crimesApi";
+import useTheme from "../context/useTheme";
 import useTranslateCrimeCategory from "../hooks/useTranslateCrimeCategory";
 
 interface MapViewProps {
@@ -10,6 +11,7 @@ interface MapViewProps {
   crimes: CrimeData[];
 }
 export default function MapView({ ref, crimes }: MapViewProps) {
+  const [theme] = useTheme();
   const translateCrimeCategory = useTranslateCrimeCategory();
 
   const markers = useMemo(() => {
@@ -55,7 +57,7 @@ export default function MapView({ ref, crimes }: MapViewProps) {
             | Contains Royal Mail data &copy; Royal Mail copyright and database right 2025
             | Source: Office for National Statistics licensed under the Open Government Licence v.3.0
             '
-        url={`http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png`}
+        url={`http://{s}.basemaps.cartocdn.com/${theme === "dark" ? "dark" : "light"}_all/{z}/{x}/{y}.png`}
         minZoom={0}
         maxZoom={20}
       />

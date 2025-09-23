@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import Button from "./Button";
 import Input from "./Input";
 import Select from "./Select";
+import ThemeToggle from "./ThemeToggle";
 
 export default function SearchBar() {
   const navigate = useNavigate();
@@ -81,7 +82,7 @@ export default function SearchBar() {
               />
             )}
 
-            <Button type="button">Theme</Button>
+            <ThemeToggle />
           </div>
         </div>
       </form>
