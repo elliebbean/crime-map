@@ -83,9 +83,7 @@ export default function Dashboard() {
             )}
 
             {!isPending && crimes.length > 0 && (
-              <div className="z-10 self-stretch shrink max-w-sm overflow-y-auto m-2 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 shadow-lg dark:bg-gray-900 dark:border-gray-700 dark:text-gray-200">
-                <CrimeStats crimes={crimes} />
-              </div>
+              <CrimeStats className="z-10 self-stretch shrink max-w-sm overflow-y-auto m-2 shadow-lg" crimes={crimes} />
             )}
           </div>
 
