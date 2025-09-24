@@ -7,6 +7,8 @@ import SearchBar from "../components/SearchBar";
 import useCrimesFromPostcodes from "../hooks/useCrimesFromPostcodes";
 import { getValidPostcodes } from "../utils/postcode";
 
+const maxPostcodes = 20;
+
 export default function Dashboard() {
   const mapRef = useRef<LeafletMap>(null);
   const params = useParams();
@@ -26,7 +28,9 @@ export default function Dashboard() {
     }
   }
 
-  const { crimes, isPending } = useCrimesFromPostcodes(postcodes, year, month);
+  const tooManyPostcodes = postcodes.length > maxPostcodes;
+
+  const { crimes, isPending } = useCrimesFromPostcodes(tooManyPostcodes ? [] : postcodes, year, month);
 
   // Recenter the map when the data changes
   useEffect(() => {
@@ -58,6 +62,8 @@ export default function Dashboard() {
 
   if (isPending) {
     message = "Loading...";
+  } else if (tooManyPostcodes) {
+    message = `Please enter a maximum of ${maxPostcodes} postcodes`;
   } else if (params.search && postcodes.length === 0) {
     message = "No valid postcodes found in your search query";
   } else if (params.search && crimes.length === 0) {
