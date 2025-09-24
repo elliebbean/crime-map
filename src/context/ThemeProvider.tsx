@@ -2,7 +2,13 @@ import { useState } from "react";
 import ThemeContext from "./ThemeContext";
 
 const localStorageKey = "theme";
-const savedTheme = localStorage.getItem(localStorageKey);
+let savedTheme: string | null = null;
+
+try {
+  savedTheme = localStorage.getItem(localStorageKey);
+} catch (e) {
+  console.error("Error loading theme from localStorage", e);
+}
 
 let defaultTheme: "light" | "dark";
 
@@ -24,8 +30,14 @@ export default function ThemeProvider({ children }: ThemeProviderProps) {
   const [themeState, setThemeState] = useState(defaultTheme);
 
   const setTheme = (theme: "light" | "dark") => {
-    localStorage.setItem(localStorageKey, theme);
+    try {
+      localStorage.setItem(localStorageKey, theme);
+    } catch (e) {
+      console.error("Error loading theme from localStorage", e);
+    }
+
     setThemeState(theme);
   };
+
   return <ThemeContext value={[themeState, setTheme]}>{children}</ThemeContext>;
 }
