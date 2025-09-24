@@ -1,10 +1,24 @@
-import { Map as LeafletMap } from "leaflet";
+import L, { Map as LeafletMap } from "leaflet";
 import { useMemo } from "react";
 import { MapContainer, Marker, Popup, TileLayer, ZoomControl } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
 import type { CrimeData } from "../api/crimesApi";
+import markerIcon2x from "../assets/marker/marker-icon-2x.png";
+import markerIcon from "../assets/marker/marker-icon.png";
+import markerShadow from "../assets/marker/marker-shadow.png";
 import useTheme from "../context/useTheme";
 import useTranslateCrimeCategory from "../hooks/useTranslateCrimeCategory";
+
+const Icon = new L.Icon({
+  iconUrl: markerIcon,
+  iconRetinaUrl: markerIcon2x,
+  shadowUrl: markerShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41],
+});
 
 interface MapViewProps {
   ref?: React.Ref<LeafletMap>;
@@ -16,7 +30,11 @@ export default function MapView({ ref, crimes }: MapViewProps) {
 
   const markers = useMemo(() => {
     return crimes.map((crime) => (
-      <Marker key={crime.id} position={[parseFloat(crime.location.latitude), parseFloat(crime.location.longitude)]}>
+      <Marker
+        icon={Icon}
+        key={crime.id}
+        position={[parseFloat(crime.location.latitude), parseFloat(crime.location.longitude)]}
+      >
         <Popup>
           <div>
             <span className="font-bold">Category:</span> {translateCrimeCategory(crime.category)}
