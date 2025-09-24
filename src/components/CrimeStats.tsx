@@ -42,7 +42,7 @@ export default function CrimeStats({ crimes, className }: CrimeStatsProps) {
         className
       )}
     >
-      <summary className="cursor-pointer p-2 font-bold text-lg bg-gray-50 dark:bg-gray-700 hover:bg-gray-200 hover:dark:bg-gray-600">
+      <summary className="cursor-pointer p-2 font-bold text-xl sm:text-lg bg-gray-50 dark:bg-gray-700 hover:bg-gray-200 hover:dark:bg-gray-600">
         {crimes.length} crimes
       </summary>
 

@@ -8,7 +8,7 @@ export default function Button({ variant = "regular", className, ...props }: But
   return (
     <button
       className={clsx(
-        "cursor-pointer border text-gray-900 text-sm font-semibold rounded-lg p-2 dark:text-white outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+        "cursor-pointer border text-gray-900 text-lg sm:text-sm font-semibold rounded-lg p-2 dark:text-white outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
         className,
         {
           "bg-blue-300 border-blue-400 dark:bg-blue-800 dark:border-blue-600 hover:bg-blue-200 hover:dark:bg-blue-700":

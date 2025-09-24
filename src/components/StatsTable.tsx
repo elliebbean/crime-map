@@ -15,7 +15,7 @@ export default function StatsTable({ headers, rows }: StatsTableProps) {
           ))}
         </tr>
       </thead>
-      <tbody className="text-sm">
+      <tbody className="sm:text-sm">
         {rows.map((row, index) => (
           <tr
             key={index}

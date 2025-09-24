@@ -72,7 +72,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className="h-screen w-screen flex flex-col">
+      <div className="h-dvh w-dvw flex flex-col">
         <SearchBar />
         <div className="grow relative">
           <div className="absolute flex flex-col w-full h-full">
@@ -83,7 +83,7 @@ export default function Dashboard() {
             )}
 
             {!isPending && crimes.length > 0 && (
-              <CrimeStats className="z-10 self-stretch shrink max-w-sm overflow-y-auto m-2 shadow-lg" crimes={crimes} />
+              <CrimeStats className="z-10 self-stretch shrink max-w-md overflow-y-auto m-2 shadow-lg" crimes={crimes} />
             )}
           </div>
 
